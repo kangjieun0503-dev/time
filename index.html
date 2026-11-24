@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이번 주 공부 계획</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap");
+
+:root {
+  --st-accent: #3fa34d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  background: #f5f7f2;
+  color: #23352a;
+  font-family: "Gowun Dodum", "Noto Sans KR", sans-serif;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 14px 60px;
+}
+
+.st-sec {
+  width: 100%;
+  margin: 20px auto;
+}
+
+.st-h {
+  color: #1f3a28;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+
+/* 상단 헤더 & 달성률 원형 차트 */
+.st-hero {
+  padding: 22px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.tp-eye {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: var(--st-accent);
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.st-hero .st-h {
+  font-size: 2.3rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.tp-ring {
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: conic-gradient(var(--st-accent) 0 0%, #dfe8da 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background 0.3s ease;
+}
+
+.tp-ring::before {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border-radius: 50%;
+  background: #f5f7f2;
+}
+
+.tp-ring b {
+  position: relative;
+  font-size: 1.3rem;
+}
+
+/* D-Day 배너 */
+.st-dday {
+  text-align: center;
+  padding: 24px 20px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--st-accent) 10%, #fff);
+}
+
+.st-dlabel {
+  margin: 0;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.st-dnum {
+  margin: 4px 0 0;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--st-accent);
+  line-height: 1.2;
+}
+
+/* 주간 날짜 버튼 영역 */
+.tp-week {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin: 16px 0 4px;
+}
+
+.tp-day-btn {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
+  text-align: center;
+  padding: 12px 0;
+  border-radius: 14px;
+  background: #fff;
+  font-size: 0.85rem;
+  color: #6b7f70;
+  line-height: 1.3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.tp-day-btn:hover {
+  transform: translateY(-2px);
+}
+
+.tp-day-btn b {
+  display: block;
+  font-size: 1.35rem;
+  color: #23352a;
+  margin-top: 2px;
+}
+
+.tp-day-btn.on {
+  background: var(--st-accent);
+  color: #e8f6ea;
+  box-shadow: 0 4px 12px rgba(63, 163, 77, 0.3);
+}
+
+.tp-day-btn.on b {
+  color: #fff;
+}
+
+/* 할 일 추가 입력 폼 */
+.todo-form {
+  display: grid;
+  grid-template-columns: 95px 1fr 1fr auto;
+  gap: 8px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.todo-form input {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1.5px solid #dfe8da;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #23352a;
+}
+
+.todo-form input:focus {
+  outline: none;
+  border-color: var(--st-accent);
+}
+
+.todo-add-btn {
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--st-accent);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.todo-add-btn:hover {
+  filter: brightness(1.06);
+}
+
+@media (max-width: 600px) {
+  .todo-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 타임라인 리스트 */
+.tp-tl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tp-tl li {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  margin: 10px 0;
+  align-items: center;
+}
+
+.tp-tl time {
+  font-size: 0.9rem;
+  color: #6b7f70;
+  font-weight: 700;
+}
+
+.todo-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border-left: 6px solid var(--st-accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+/* 카드 왼쪽 포인트 컬러 순환 */
+.tp-tl li:nth-child(4n+2) .todo-card { border-color: #4a90d9; }
+.tp-tl li:nth-
